@@ -19,7 +19,7 @@ Person BuildingsQueue::getPerson(int index)
 
 void BuildingsQueue::sortByTheLengthOfStay()
 {
-	std::sort(list.begin(), list.end(), sortUtilFunction);
+	std::sort(list.begin(), list.end(), [](auto& i, auto& j) {return i.second < j.second; });
 }
 
 //std::string BuildingsQueue::toString()
@@ -39,9 +39,12 @@ std::ostream& operator << (std::ostream& os, const BuildingsQueue& buildingsQueu
 {
 	int i = 1;
 	os << "Buildings Queue { \n";
-	for (auto iter = buildingsQueue.list.begin(); iter != buildingsQueue.list.end(); iter++)
-	{
-		os << i++ << ".) " << iter->first << " - " << iter->second << "\n";
+	//for (auto iter = buildingsQueue.list.begin(); iter != buildingsQueue.list.end(); iter++)
+	//{
+	//	os << i++ << ".) " << iter->first << " - " << iter->second << "\n";
+	//}
+	for (auto& iter : buildingsQueue.list) {
+		os << i++ << ".) " << iter.first << " - " << iter.second << "\n";
 	}
 	os << "\n} ";
 	return os;
